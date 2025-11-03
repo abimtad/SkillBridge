@@ -1,23 +1,18 @@
-import React, { useState } from "react";
 import "./App.css";
 import MovieSearch from "./components/MovieSearch";
-import CurrentTime from "./components/CurrentTime";
 
 function App() {
   const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-  const [showTime, setShowTime] = useState(true);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React useEffect Hook Concepts</h1>
+        <h1>React useEffect Hook Workshop</h1>
       </header>
       <main>
-        <button onClick={() => setShowTime(!showTime)}>
-          {showTime ? "Hide" : "Show"} Live Clock
-        </button>
-        {showTime && <CurrentTime />}
         <MovieSearch apiKey={apiKey} />
+
+        {/* 4. CLEANUP: We will add a new component here later to demonstrate the cleanup function. */}
       </main>
     </div>
   );

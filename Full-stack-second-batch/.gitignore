@@ -1,0 +1,125 @@
+# Node modules
+node_modules/
+
+# Build outputs
+/dist
+/build
+/.parcel-cache
+/.next
+/out
+
+# Vite
+/.vite
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables
+.env
+.env.*.local
+.env.local
+
+# Test coverage
+coverage/
+.nyc_output/
+coverage-final.json
+
+# jest cache
+/jest-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+
+# Linux
+*~
+
+# npm lockfiles are usually committed; do NOT ignore package-lock.json or yarn.lock
+# If you want to ignore all lockfiles (NOT recommended), uncomment the next lines
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Coverage and reports
+coverage/
+reports/
+
+# Temporary files
+tmp/
+temp/
+
+# Editor swap files
+*.swp
+*.swo
+
+# Build artifacts for frontend bundles
+*.map
+*.gz
+*.br
+
+# Docker
+docker-compose.override.yml
+Dockerfile.dev
+
+# MacOS Finder tags
+*.icloud
+
+# SSH
+*.pem
+
+# Machine generated files
+npm-debug.log*
+
+# Ignore local env for editors that store workspace settings here
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Ignore coverage from CI artifacts
+.cache/
+
+# Misc
+.idea_modules/
+
+# If you generate any credentials or keys during development, ensure they are added here
+# For example: secret.key
+
+# End of file

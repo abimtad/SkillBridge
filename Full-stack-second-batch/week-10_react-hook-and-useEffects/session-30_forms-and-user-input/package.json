@@ -1,0 +1,21 @@
+{
+  "name": "react-forms-teaching",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "formik": "2.2.9",
+    "yup": "1.2.0",
+    "react-hook-form": "7.45.1",
+    "axios": "1.4.0"
+  },
+  "devDependencies": {
+    "vite": "4.5.0"
+  }
+}

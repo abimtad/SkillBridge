@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ControlledForm from "./components/ControlledForm";
 import ValidationForm from "./components/ValidationForm";
-import FormikExample from "./components/FormikExample";
 import ReactHookFormExample from "./components/ReactHookFormExample";
 import FileUploadForm from "./components/FileUploadForm";
 

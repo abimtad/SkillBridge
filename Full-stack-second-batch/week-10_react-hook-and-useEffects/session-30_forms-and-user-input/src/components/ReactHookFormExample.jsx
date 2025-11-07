@@ -18,7 +18,7 @@ export default function ReactHookFormExample() {
         performance.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <div className="form-row">
           <label htmlFor="title">Title</label>
           <input />

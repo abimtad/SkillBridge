@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, { useState } from "react";
->>>>>>> finished-app
 import UseContextExample from "./components/UseContextExample/UseContextExample";
 import Counter from "./components/UseReducerExample/Counter";
 import UseMemoCallbackExample from "./components/UseMemoCallbackExample/UseMemoCallbackExample";

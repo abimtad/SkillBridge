@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-<<<<<<< HEAD
-.page {
-=======
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -18,20 +15,13 @@
 
 .App-header {
   background-color: #282c34;
->>>>>>> finished-app
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-<<<<<<< HEAD
-  border-bottom: 2px solid #ccc;
-=======
   color: white;
-}
-
-.App-link {
   color: #61dafb;
 }
 
@@ -42,5 +32,4 @@
   to {
     transform: rotate(360deg);
   }
->>>>>>> finished-app
 }

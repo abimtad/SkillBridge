@@ -11,26 +11,6 @@ import HookRules from "./components/HookRules/HookRules";
 import "./App.css";
 
 function App() {
-<<<<<<< HEAD
-  return (
-    <div className="App">
-      <h1>React Hooks Demo</h1>
-      <div className="page">
-        <UseContextExample />
-      </div>
-      <div className="page">
-        <Counter />
-      </div>
-      <div className="page">
-        <UseMemoCallbackExample />
-      </div>
-      <div className="page">
-        <CustomHookExample />
-      </div>
-      <div className="page">
-        <HookRules />
-      </div>
-=======
   const [count, setCount] = useState(0);
   return (
     <div className="App">
@@ -45,7 +25,6 @@ function App() {
       <CustomHookExample />
       <hr />
       <HookRules />
->>>>>>> finished-app
     </div>
   );
 }

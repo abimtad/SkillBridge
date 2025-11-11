@@ -12,16 +12,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/posts" element={<Posts />}>
-              <Route path=":postId" element={<Post />} />
-            </Route>
-          </Routes>
-        </div>
+        main app
       </div>
     </Router>
   );

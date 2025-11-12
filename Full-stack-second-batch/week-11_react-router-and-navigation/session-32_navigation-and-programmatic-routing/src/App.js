@@ -30,21 +30,9 @@ function App() {
               </Route>
 
               {/* Demo pages */}
-              <Route path="/nav-demo" element={<NavDemo />} />
-              <Route path="/navigate-demo" element={<NavigateDemo />} />
-              <Route path="/params-demo/:id" element={<ParamsLocationDemo />} />
 
               {/* Protected route */}
-              <Route
-                path="/protected"
-                element={
-                  <ProtectedRoute>
-                    <ProtectedPage />
-                  </ProtectedRoute>
-                }
-              />
 
-              <Route path="/login" element={<Login />} />
             </Routes>
           </div>
         </div>

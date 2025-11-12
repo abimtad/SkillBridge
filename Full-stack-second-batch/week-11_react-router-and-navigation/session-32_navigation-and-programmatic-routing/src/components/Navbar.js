@@ -1,71 +1,63 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const activeStyle = {
   fontWeight: "bold",
   textDecoration: "underline",
 };
 
-const Navbar = () => {
+const bar = () => {
   return (
     <nav>
       <ul>
         <li>
-          <NavLink
+          <Link
             to="/"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            end
           >
             Home
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/about"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             About
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/posts"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Posts
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/nav-demo"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            NavLink demo
-          </NavLink>
+            Link demo
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/navigate-demo"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             useNavigate demo
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/params-demo/42?ref=navbar"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             params & location demo
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink
+          <Link
             to="/protected"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Protected
-          </NavLink>
+          </Link>
         </li>
         <li>
           <a href="/traditional/index.html">Without React Router</a>
@@ -75,4 +67,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default bar;

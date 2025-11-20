@@ -1,7 +1,9 @@
 import React from "react";
 import { useAuthStore } from "../state/authStore.js";
+import { useRenderCount } from "./useRenderCount.js";
 
 export default function AuthPanel() {
+  useRenderCount("AuthPanel");
   const user = useAuthStore((s) => s.user);
   const token = useAuthStore((s) => s.token);
   const login = useAuthStore((s) => s.login);

@@ -1,7 +1,9 @@
 import React from "react";
 import { useCounterStore } from "../state/counterStore.js";
+import { useRenderCount } from "./useRenderCount.js";
 
 export default function CounterPanel() {
+  useRenderCount("CounterPanel");
   const count = useCounterStore((s) => s.count);
   const increment = useCounterStore((s) => s.increment);
   const decrement = useCounterStore((s) => s.decrement);

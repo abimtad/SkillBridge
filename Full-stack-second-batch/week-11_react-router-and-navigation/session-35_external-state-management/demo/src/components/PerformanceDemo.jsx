@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useCounterStore } from "../state/counterStore.js";
+import { useRenderCount } from "./useRenderCount.js";
 
 // Shows difference between subscribing to whole store vs a slice.
 export default function PerformanceDemo() {
+  useRenderCount("PerformanceDemo(full+slice)");
   const full = useCounterStore(); // full subscription (not recommended generally)
   const count = useCounterStore((s) => s.count); // slice subscription (preferred)
 

@@ -1,7 +1,9 @@
 import React from "react";
 import { usePrefsStore } from "../state/prefsStore.js";
+import { useRenderCount } from "./useRenderCount.js";
 
 export default function ThemeToggle() {
+  useRenderCount("ThemeToggle");
   const theme = usePrefsStore((s) => s.theme);
   const toggleTheme = usePrefsStore((s) => s.toggleTheme);
   const reset = usePrefsStore((s) => s.reset);

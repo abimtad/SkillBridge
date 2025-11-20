@@ -8,10 +8,6 @@ import PerformanceDemo from "./components/PerformanceDemo";
 export default function App() {
   return (
     <div className="grid">
-      <CounterPanel />
-      <AuthPanel />
-      <ThemeToggle />
-      <PerformanceDemo />
     </div>
   );
 }

@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-core-module-demos",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Teaching demos for Node.js core modules: fs, path, http, url.",
+  "main": "http_demo.js",
+  "scripts": {
+    "demo:fs": "node fs_demo.js",
+    "demo:path": "node path_demo.js",
+    "demo:http": "node http_demo.js",
+    "demo:url": "node url_demo.js"
+  }
+}

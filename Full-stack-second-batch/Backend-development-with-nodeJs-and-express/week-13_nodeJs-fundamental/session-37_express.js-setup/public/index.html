@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express Demo Static</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Express Static Files Demo</h1>
+      <p>
+        This page is served from the <code>public/</code> directory using
+        <code>express.static</code>.
+      </p>
+      <img src="/static/logo.png" alt="Demo Logo" width="120" />
+      <section>
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="/api/welcome">Text response</a></li>
+          <li><a href="/api/users">JSON response</a></li>
+          <li><a href="/api/headers-demo">Custom headers</a></li>
+          <li>
+            <a href="/health">Health (200)</a> |
+            <a href="/health?fail=true">Health (503)</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

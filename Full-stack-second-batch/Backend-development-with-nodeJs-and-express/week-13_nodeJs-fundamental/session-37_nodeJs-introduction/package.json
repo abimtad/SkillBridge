@@ -9,9 +9,5 @@
     "demo:path": "node path_demo.js",
     "demo:http": "node http_demo.js",
     "demo:url": "node url_demo.js",
-    "demo:fs:cjs": "node fs_demo.cjs",
-    "demo:path:cjs": "node path_demo.cjs",
-    "demo:http:cjs": "node http_demo.cjs",
-    "demo:url:cjs": "node url_demo.cjs"
   }
 }

@@ -12,29 +12,6 @@ if (!fs.existsSync(htmlPath)) {
   );
 }
 
-const server = http.createServer((req, res) => {
-  // Parse request URL
-  const reqUrl = new URL(req.url, `http://${req.headers.host}`);
-
-  if (reqUrl.pathname === "/api/echo" && req.method === "GET") {
-    const msg = reqUrl.searchParams.get("msg") || "Hello";
-    res.writeHead(200, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify({ message: msg, time: Date.now() }));
-  }
-
-  if (reqUrl.pathname === "/api/time") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify({ now: new Date().toISOString() }));
-  }
-
-  if (reqUrl.pathname === "/" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    return fs.createReadStream(htmlPath).pipe(res);
-  }
-
-  res.writeHead(404, { "Content-Type": "application/json" });
-  res.end(JSON.stringify({ error: "Not Found" }));
-});
 
 const PORT = 4000;
 server.listen(PORT, () => {

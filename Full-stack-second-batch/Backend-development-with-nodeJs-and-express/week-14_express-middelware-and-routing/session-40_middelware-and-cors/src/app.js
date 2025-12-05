@@ -1,9 +1,10 @@
 import express from "express";
 import usersRouter from "./routes/users.js";
-import corsOptions from "./config/corsOptions";
-import logger from "./middleware/logger";
-import requestTime from "./middleware/requestTime";
-import errorHandler from "./middleware/errorHandler";
+import corsOptions from "./config/corsOptions.js";
+import logger from "./middelwares/logger.js";
+import requestTime from "./middelwares/requestTime.js";
+import errorHandler from "./middelwares/errorHandler.js";
+import cors from "cors";
 
 const app = express();
 
@@ -14,7 +15,6 @@ app.use(cors(corsOptions));
 app.use(logger);
 app.use(requestTime);
 
-
 app.use("/api/v1/users", usersRouter);
 
 app.use("/api/v1", (req, res) => {
@@ -22,6 +22,5 @@ app.use("/api/v1", (req, res) => {
 });
 
 app.use(errorHandler);
-
 
 export default app;

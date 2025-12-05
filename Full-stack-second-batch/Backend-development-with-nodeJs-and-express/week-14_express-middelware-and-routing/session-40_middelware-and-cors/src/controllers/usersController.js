@@ -19,7 +19,7 @@ export async function createUser(req, res) {
       throw new Error({ status: 400, message: "Bad request" });
     }
 
-    const user = await usersService.create({ name, email, createAt: req.requestTime });
+    const user = await usersService.create({ name, email });
     console.log("user:", user);
 
     res.status(201).json({ data: user });

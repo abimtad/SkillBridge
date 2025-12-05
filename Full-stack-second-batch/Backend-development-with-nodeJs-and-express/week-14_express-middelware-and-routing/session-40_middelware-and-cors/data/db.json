@@ -24,7 +24,19 @@
       "id": 5,
       "name": "nahom",
       "email": "beti@gamil.com"
+    },
+    {
+      "id": 6,
+      "name": "late",
+      "email": "late@gmail.com",
+      "createAt": 1764951078055
+    },
+    {
+      "id": 7,
+      "name": "sena",
+      "email": "sena@gmail.com",
+      "createAt": "2025-12-05T16:14:25.423Z"
     }
   ],
-  "nextId": 6
+  "nextId": 8
 }

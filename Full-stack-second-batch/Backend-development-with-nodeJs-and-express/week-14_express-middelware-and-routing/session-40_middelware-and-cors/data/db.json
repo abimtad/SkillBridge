@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "leul",
+      "email": "beti@gamil.com"
+    },
+    {
+      "id": 2,
+      "name": "mike",
+      "email": "bob@example.com"
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "email": "charlie@example.com"
+    },
+    {
+      "id": 4,
+      "name": "beti",
+      "email": "beti@gamil.com"
+    },
+    {
+      "id": 5,
+      "name": "nahom",
+      "email": "beti@gamil.com"
+    }
+  ],
+  "nextId": 6
+}

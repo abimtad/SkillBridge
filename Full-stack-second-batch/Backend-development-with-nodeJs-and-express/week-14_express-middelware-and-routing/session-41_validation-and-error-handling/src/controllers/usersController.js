@@ -1,14 +1,14 @@
 import * as usersService from "../services/usersService.js";
-import {
-  NotFoundError,
-  ConflictError,
-  BadRequestError
-} from "../errors/ApiError.js";
+// import {
+//   NotFoundError,
+//   ConflictError,
+//   BadRequestError
+// } from "../errors/ApiError.js";
 
 export async function listUsers(req, res, next) {
   try {
     const users = await usersService.list();
-    res.json(users);
+    res.json({data: users, when: req.requestTime});
   } catch (err) {
     next(err);
   }
@@ -19,9 +19,9 @@ export async function createUser(req, res, next) {
     const { name, email } = req.body;
 
     const existing = await usersService.getByEmail(email);
-    if (existing) {
-      throw new ConflictError("A user with this email already exists");
-    }
+    // if (existing) {
+    //   throw new ConflictError("A user with this email already exists");
+    // }
 
     const user = await usersService.create({ name, email, createAt: req.requestTime });
 
@@ -70,5 +70,5 @@ export async function updateUser(req, res, next) {
 }
 
 export async function deleteUser(req, res, next) {
-  next(new BadRequestError("Delete user not implemented"));
+  // next(new BadRequestError("Delete user not implemented"));
 }

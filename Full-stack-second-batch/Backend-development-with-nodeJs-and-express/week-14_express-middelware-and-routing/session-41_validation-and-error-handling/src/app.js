@@ -5,7 +5,7 @@ import logger from "./middelwares/logger.js";
 import requestTime from "./middelwares/requestTime.js";
 import errorHandler from "./middelwares/errorHandler.js";
 import cors from "cors";
-import { NotFoundError } from "./errors/ApiError.js";
+// import { NotFoundError } from "./errors/ApiError.js";
 
 const app = express();
 

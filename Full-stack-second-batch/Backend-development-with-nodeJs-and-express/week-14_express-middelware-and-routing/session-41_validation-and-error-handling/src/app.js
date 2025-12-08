@@ -19,7 +19,6 @@ app.use(requestTime);
 app.use("/api/v1/users", usersRouter);
 
 app.use("/api/v1", (req, res, next) => {
-  next(new NotFoundError("Route not found"));
 });
 
 app.use(errorHandler);

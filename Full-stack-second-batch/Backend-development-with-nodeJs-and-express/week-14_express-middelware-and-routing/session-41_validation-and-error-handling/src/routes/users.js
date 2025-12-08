@@ -6,21 +6,14 @@ import {
   createUser,
   replaceUser
 } from "../controllers/usersController.js";
-import validateRequest from "../middelwares/validateRequest.js";
-import {
-  createUserValidation,
-  replaceUserValidation,
-  updateUserValidation,
-  getUserValidation
-} from "../middelwares/validators/userValidators.js";
 
 const router = express.Router();
 
 router.get("/", listUsers);
-router.get("/:id", getUserValidation, validateRequest, getUser);
-router.post("/create", createUserValidation, validateRequest, createUser);
-router.put("/:id", replaceUserValidation, validateRequest, replaceUser);
-router.patch("/:id", updateUserValidation, validateRequest, updateUser);
+router.get("/:id" getUser);
+router.post("/create" createUser);
+router.put("/:id" replaceUser);
+router.patch("/:id" updateUser);
 // router.delete("/:id", );
 
 export default router;

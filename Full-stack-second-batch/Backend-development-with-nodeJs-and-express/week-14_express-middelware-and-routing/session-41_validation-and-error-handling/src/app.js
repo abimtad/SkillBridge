@@ -5,6 +5,7 @@ import logger from "./middelwares/logger.js";
 import requestTime from "./middelwares/requestTime.js";
 import errorHandler from "./middelwares/errorHandler.js";
 import cors from "cors";
+import { NotFoundError } from "./errors/ApiError.js";
 
 const app = express();
 
@@ -17,9 +18,10 @@ app.use(requestTime);
 
 app.use("/api/v1/users", usersRouter);
 
-app.use("/api/v1", (req, res) => {
-  res.status(404).json({ error: "Not Found" });
+app.use("/api/v1", (req, res, next) => {
+  next(new NotFoundError("Route not found"));
 });
 
+app.use(errorHandler);
 
 export default app;

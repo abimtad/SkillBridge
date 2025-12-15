@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "username": "alice",
+      "password": "alicepass",
+      "role": "user"
+    },
+    {
+      "id": "u2",
+      "username": "bob",
+      "password": "bobpass",
+      "role": "admin"
+    }
+  ],
+  "refreshTokens": []
+}

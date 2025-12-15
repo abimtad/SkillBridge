@@ -1,0 +1,17 @@
+{
+  "name": "jwt-mini-project",
+  "version": "1.0.0",
+  "description": "Mini project demonstrating core JWT authentication topics with Express and lowdb",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "lowdb": "^7.0.1",
+    "nanoid": "^5.0.4"
+  }
+}

@@ -1,4 +1,7 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // Convention: access token short-lived
 const ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOKEN_EXPIRES_IN || '15m';

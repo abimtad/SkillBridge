@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "username": "alice",
+      "email": "alice@example.com",
+      "password": "alicepass",
+      "role": "user",
+      "resetPasswordToken": null,
+      "resetPasswordExpires": null
+    },
+    {
+      "id": "u2",
+      "username": "bob",
+      "email": "bob@example.com",
+      "password": "bobpass",
+      "role": "admin",
+      "resetPasswordToken": null,
+      "resetPasswordExpires": null
+    },
+    {
+      "id": 3,
+      "username": "abimtad",
+      "email": "abel@gmail.com",
+      "password": "$2b$10$7tn4iqJy.XA7jmt/EtMXuu7y9P.WgI2OQV.MoWsD0NzLq/0hyVNMq",
+      "role": "user",
+      "resetPasswordToken": null,
+      "resetPasswordExpires": null
+    }
+  ],
+  "refreshTokens": []
+}

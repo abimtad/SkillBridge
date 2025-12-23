@@ -1,25 +1,14 @@
 import { Router } from 'express';
 import { authenticate, authorize } from '../middlewares/auth.middleware.js';
-import { postLogin, getTokenStructure, postLogout, postSignup, postForgotPassword, postResetPassword } from '../controllers/auth.controller.js';
-import { validateSignup, validateEmail, validateLogin, validateRequest } from '../middlewares/validation.middleware.js';
+import { postLogin, getTokenStructure, postLogout } from '../controllers/auth.controller.js';
+import {  validateLogin, validateRequest } from '../middlewares/validation.middleware.js';
 
 export const router = Router();
-
-router.post('/signup',validateSignup, validateRequest,
-  postSignup
-);
 
 // Token generation and verification
 router.post('/login', validateLogin,validateRequest, postLogin);
 
 
-router.post(
-  '/forgot-password',
-  validateEmail,
-  validateRequest,
-  postForgotPassword
-);
-router.post('/reset-password', postResetPassword);
 
 // Clear cookie on logout
 router.post('/logout', postLogout);

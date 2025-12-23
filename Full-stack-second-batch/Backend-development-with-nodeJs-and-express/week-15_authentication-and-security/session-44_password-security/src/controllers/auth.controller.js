@@ -1,5 +1,5 @@
 import { AppError } from '../errors/app-error.js';
-import { login, signup, forgotPassword, resetPassword } from '../services/auth.service.js';
+import { login } from '../services/auth.service.js';
 import { decodeToken } from '../utils/jwt.util.js';
 
 export async function postLogin(req, res, next) {
@@ -30,39 +30,6 @@ export async function postLogin(req, res, next) {
     next(e);
   }
 }
-
-export async function postSignup(req, res, next) {
-  try {
-    const { username, email, password } = req.body;
-    const result = await signup(username, email, password);
-    res.status(201).json({
-      message: 'User created',
-      user: result.user,
-    });
-  } catch (e) {
-    next(e);
-  }
-}
-
-export async function postForgotPassword(req, res, next) {
-    try {
-      const { email } = req.body;
-      const response = await forgotPassword(email);
-      res.json(response);
-    } catch (e) {
-      next(e);
-    }
-  }
-  
-  export async function postResetPassword(req, res, next) {
-    try {
-      const { token, password } = req.body;
-      await resetPassword(token, password);
-      res.json({ message: 'Password has been reset' });
-    } catch (e) {
-      next(e);
-    }
-  }
 
 export async function getTokenStructure(req, res) {
   const authHeader = req.headers.authorization;

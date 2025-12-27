@@ -39,7 +39,6 @@ export async function signup(username, email, password) {
 
   db.data.users.push(newUser);
   await db.write();
-  await sendVerificationEmail(user.email, verificationToken);
 
   return { user: { id: newUser.id, username: newUser.username, email: newUser.email, role: newUser.role } };
 }

@@ -16,5 +16,8 @@
     "jsonwebtoken": "^9.0.2",
     "lowdb": "^7.0.1",
     "nanoid": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3"
   }
 }

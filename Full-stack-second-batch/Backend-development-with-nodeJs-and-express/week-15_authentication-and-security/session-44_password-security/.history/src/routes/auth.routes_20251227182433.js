@@ -20,8 +20,6 @@ router.post(
   postForgotPassword
 );
 router.post('/reset-password', postResetPassword);
-router.post('/verify-email', postResetPassword);
-router.post('/reset-password', postResetPassword);
 
 // Clear cookie on logout
 router.post('/logout', postLogout);

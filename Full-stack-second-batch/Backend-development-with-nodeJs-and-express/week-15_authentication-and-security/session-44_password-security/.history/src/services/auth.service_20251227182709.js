@@ -32,14 +32,11 @@ export async function signup(username, email, password) {
     username,
     email,
     password: hashedPassword,
-    verificationToken,
-    verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
     role: 'user',
   };
 
   db.data.users.push(newUser);
   await db.write();
-  await sendVerificationEmail(user.email, verificationToken);
 
   return { user: { id: newUser.id, username: newUser.username, email: newUser.email, role: newUser.role } };
 }

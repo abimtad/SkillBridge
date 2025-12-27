@@ -123,3 +123,4 @@ npm-debug.log*
 # For example: secret.key
 
 # End of file
+.history/

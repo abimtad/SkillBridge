@@ -12,7 +12,6 @@ export async function postLogin(req, res, next) {
     const fifteenMinutesMs = 15 * 60 * 1000;
     const cookieMaxAge = Number(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE_MS || fifteenMinutesMs);
     const secure = process.env.NODE_ENV === 'production';
-
     res.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure,
@@ -48,7 +47,7 @@ export async function postSignup(req, res, next) {
 
 export async function postForgotPassword(req, res, next) {
     try {
-      const { email } = req.body;
+      const { email } = req.query.token;
       const response = await forgotPassword(email);
       res.json(response);
     } catch (e) {
@@ -58,8 +57,7 @@ export async function postForgotPassword(req, res, next) {
   
   export async function postResetPassword(req, res, next) {
     try {
-      const { password } = req.body;
-      const token = req.query.token;
+      const { token, password } = req.body;
       await resetPassword(token, password);
       res.json({ message: 'Password has been reset' });
     } catch (e) {

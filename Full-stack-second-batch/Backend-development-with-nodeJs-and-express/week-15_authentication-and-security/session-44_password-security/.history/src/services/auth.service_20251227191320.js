@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { findByUsername } from './user.service.js';
 import { AppError } from '../errors/app-error.js';
 import crypto from 'crypto';
-import { sendForgotPasswordEmail, sendPasswordResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from '../lib/nodeMail/email.js';
+import { sendPasswordResetSuccessEmail, sendVerificationEmail } from '../lib/nodeMail/email.js';
 import { env } from '../config/index.js';
 
 export async function signup(name, username, email, password) {
@@ -38,10 +38,23 @@ export async function signup(name, username, email, password) {
   };
 
   db.data.users.push(newUser);
-
   await db.write();
-
   await sendVerificationEmail(newUser.email, verificationToken);
+    const user = await User.findOne({
+      verificationToken: code,
+      verificationTokenExpiresAt: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return next(errorHandler(400, "Invalid or expired verification code"));
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    await user.save();
+
+    await sendWelcomeEmail(user.email, user.name);
 
   return { user: { id: newUser.id, username: newUser.username, email: newUser.email, role: newUser.role } };
 }

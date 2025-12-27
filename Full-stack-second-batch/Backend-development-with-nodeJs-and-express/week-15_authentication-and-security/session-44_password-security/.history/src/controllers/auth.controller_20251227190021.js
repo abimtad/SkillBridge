@@ -1,4 +1,3 @@
-import { verify } from 'crypto';
 import { AppError } from '../errors/app-error.js';
 import { login, signup, forgotPassword, resetPassword } from '../services/auth.service.js';
 import { decodeToken } from '../utils/jwt.util.js';
@@ -12,7 +11,6 @@ export async function postLogin(req, res, next) {
     const fifteenMinutesMs = 15 * 60 * 1000;
     const cookieMaxAge = Number(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE_MS || fifteenMinutesMs);
     const secure = process.env.NODE_ENV === 'production';
-
     res.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure,
@@ -58,8 +56,7 @@ export async function postForgotPassword(req, res, next) {
   
   export async function postResetPassword(req, res, next) {
     try {
-      const { password } = req.body;
-      const token = req.query.token;
+      const { token, password } = req.body;
       await resetPassword(token, password);
       res.json({ message: 'Password has been reset' });
     } catch (e) {
@@ -91,12 +88,15 @@ export async function postLogout(req, res) {
 
 export const verifyEmail = async (req, res, next) => {
   const { code } = req.body;
+  console.log("code: ", code);
   try {
-    const user = await verify(code)
     res.status(200).json({
       success: true,
       message: "Email verified successfully",
-      ...user
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
     });
   } catch (error) {
     next(error);

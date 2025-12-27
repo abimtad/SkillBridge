@@ -12,7 +12,6 @@ export async function postLogin(req, res, next) {
     const fifteenMinutesMs = 15 * 60 * 1000;
     const cookieMaxAge = Number(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE_MS || fifteenMinutesMs);
     const secure = process.env.NODE_ENV === 'production';
-
     res.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure,

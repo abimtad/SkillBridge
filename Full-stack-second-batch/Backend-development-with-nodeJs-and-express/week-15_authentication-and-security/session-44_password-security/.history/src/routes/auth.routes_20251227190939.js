@@ -19,8 +19,9 @@ router.post(
   validateRequest,
   postForgotPassword
 );
-router.post('/reset-password', postResetPassword);
+router.post('/reset-password?token', postResetPassword);
 router.post('/verify-email', postResetPassword);
+router.post('/reset-password', postResetPassword);
 
 // Clear cookie on logout
 router.post('/logout', postLogout);

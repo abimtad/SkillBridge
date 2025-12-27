@@ -4,10 +4,12 @@ import bcrypt from 'bcrypt';
 import { findByUsername } from './user.service.js';
 import { AppError } from '../errors/app-error.js';
 import crypto from 'crypto';
-import { sendForgotPasswordEmail, sendPasswordResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from '../lib/nodeMail/email.js';
-import { env } from '../config/index.js';
+import { sendVerificationEmail } from '../lib/nodeMail/email.js';
 
-export async function signup(name, username, email, password) {
+export async function signup(username, email, password) {
+  if (!username || !email || !password) {
+    throw new AppError(400, 'Username, email, and password are required');
+  }
   await db.read();
   const existingUser = await findByUsername(username);
   if (existingUser) {
@@ -28,7 +30,6 @@ export async function signup(name, username, email, password) {
 
   const newUser = {
     id: db.data.users.length + 1,
-    name,
     username,
     email,
     password: hashedPassword,
@@ -38,9 +39,7 @@ export async function signup(name, username, email, password) {
   };
 
   db.data.users.push(newUser);
-
   await db.write();
-
   await sendVerificationEmail(newUser.email, verificationToken);
 
   return { user: { id: newUser.id, username: newUser.username, email: newUser.email, role: newUser.role } };
@@ -71,9 +70,6 @@ export async function forgotPassword(email) {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
   
     await db.write();
-
-    const resetUrl = env.baseUrl + `/reset-password/${resetPasswordToken}`;
-    await sendForgotPasswordEmail(user.email, resetUrl, next);
   
     // In a real app, you'd send an email with the resetToken
     console.log(`Password reset token for ${email}: ${resetToken}`);
@@ -81,7 +77,6 @@ export async function forgotPassword(email) {
     return {
       message: 'Password reset token generated. It will expire in 1 hour.',
       token: resetToken,
-      resetUrl
     };
   }
   
@@ -103,36 +98,25 @@ export async function forgotPassword(email) {
     user.resetPasswordExpires = null;
   
     await db.write();
-
-    await sendPasswordResetSuccessEmail(user.email);
   
     return { message: 'Password has been reset' };
   }
 
 
-export async function verify(verificationCode) {
-    await db.read()
+export const verifyEmail = async (req, res, next) => {
+  const { code } = req.body;
+  console.log("code: ", code);
+  try {
 
-    const user = await db.data.users.find( (u) =>{
-      u.verificationToken === verificationCode &&
-      u.verificationTokenExpiresAt  > Date.now()
-    });
-
-    if (!user) {
-      throw  new AppError(400, "Invalid or expired verification code");
-    }
-
-    user.isVerified = true;
-    user.verificationToken = undefined;
-    user.verificationTokenExpiresAt = undefined;
-    await user.write();
-
-    await sendWelcomeEmail(user.email, user.name);
-
-    return {data: {
+    res.status(200).json({
+      success: true,
+      message: "Email verified successfully",
       user: {
-        ...user,
-        password: undefined
-      }
-    }}
-}
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};

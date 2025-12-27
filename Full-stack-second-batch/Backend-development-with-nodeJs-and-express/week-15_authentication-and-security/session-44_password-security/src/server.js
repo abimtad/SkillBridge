@@ -8,7 +8,7 @@ app.use(express.json());
 
 await initDb();
 
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 app.use(errorMiddleware);
 

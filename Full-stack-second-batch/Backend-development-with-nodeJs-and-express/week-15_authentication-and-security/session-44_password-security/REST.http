@@ -1,0 +1,64 @@
+### Signup
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123",
+  "username": "testuser"
+}
+
+### Login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+### Forgot Password
+POST http://localhost:3000/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com"
+}
+
+### Reset Password
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "token": "some-reset-token",
+  "password": "newpassword123"
+}
+
+### Verify Email
+POST http://localhost:3000/api/auth/verify-email
+Content-Type: application/json
+
+{
+  "token": "some-verification-token"
+}
+
+### Logout
+POST http://localhost:3000/api/auth/logout
+
+### Secret Route
+GET http://localhost:3000/api/auth/secrete
+Authorization: Bearer {{token}}
+
+### Protected Route
+GET http://localhost:3000/api/auth/protected
+Authorization: Bearer {{token}}
+
+### Admin Route
+GET http://localhost:3000/api/auth/admin
+Authorization: Bearer {{token}}
+
+### Token Structure
+GET http://localhost:3000/api/auth/token-structure
+
+### Token Storage Strategies
+GET http://localhost:3000/api/auth/token-storage-strategies

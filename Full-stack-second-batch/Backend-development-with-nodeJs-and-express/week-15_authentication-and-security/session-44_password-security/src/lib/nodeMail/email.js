@@ -9,7 +9,7 @@ import { WELCOME_EMAIL_TEMPLATE } from "./emailTemplates.js";
 export const sendVerificationEmail = async (email, verificationCode) => {
   try {
     await mailer.sendMail({
-      from: { name: "Abel", address: process.env.AUTH_EMAIL },
+      from: { name: "Abel", address: env.authEmail },
       to: email,
       subject: "Email Verification",
       html: VERIFICATION_EMAIL_TEMPLATE.replace(
@@ -26,7 +26,7 @@ export const sendVerificationEmail = async (email, verificationCode) => {
 export const sendWelcomeEmail = async (email, name) => {
   try {
     await mailer.sendMail({
-      from: { name: "Abel", address: process.env.AUTH_EMAIL },
+      from: { name: "Abel", address: env.authEmail },
       to: email,
       subject: "Welcome",
       html: WELCOME_EMAIL_TEMPLATE.replace("{name}", name),
@@ -40,7 +40,7 @@ export const sendWelcomeEmail = async (email, name) => {
 export const sendForgotPasswordEmail = async (email, resetUrl, next) => {
   try {
     await mailer.sendMail({
-      from: { name: "Abel", address: process.env.AUTH_EMAIL },
+      from: { name: "Abel", address: env.authEmail },
       to: email,
       subject: "Forgot Password",
       html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetUrl),
@@ -53,7 +53,7 @@ export const sendForgotPasswordEmail = async (email, resetUrl, next) => {
 export const sendPasswordResetSuccessEmail = async (email, next) => {
   try {
     await mailer.sendMail({
-      from: { name: "Abel", address: process.env.AUTH_EMAIL },
+      from: { name: "Abel", address: env.authEmail },
       to: email,
       subject: "Successfully reset password !",
       html: PASSWORD_RESET_SUCCESS_TEMPLATE,

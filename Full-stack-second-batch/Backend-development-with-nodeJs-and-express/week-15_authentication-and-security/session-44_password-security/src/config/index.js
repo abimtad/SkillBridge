@@ -12,8 +12,8 @@ function requireEnv(name) {
 
 export const env = {
   nodeEnv: requireEnv("NODE_ENV"),
-  port: Number(requireEnv("PORT")),
-  databaseUrl: requireEnv("DATABASE_URL"),
+  // port: Number(requireEnv("PORT")),
+  // databaseUrl: requireEnv("DATABASE_URL"),
   jwtSecret: requireEnv("JWT_SECRET"),
   baseUrl: requireEnv("BASE_URL"),
   authEmail: requireEnv("AUTH_EMAIL"),

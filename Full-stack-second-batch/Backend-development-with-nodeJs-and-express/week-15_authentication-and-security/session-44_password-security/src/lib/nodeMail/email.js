@@ -5,6 +5,7 @@ import {
 } from "./emailTemplates.js";
 import { mailer } from "./mailer.js";
 import { WELCOME_EMAIL_TEMPLATE } from "./emailTemplates.js";
+import {env} from "../../config/index.js";
 
 export const sendVerificationEmail = async (email, verificationCode) => {
   try {

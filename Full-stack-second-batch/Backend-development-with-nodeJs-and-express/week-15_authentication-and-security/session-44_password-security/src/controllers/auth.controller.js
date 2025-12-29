@@ -1,5 +1,5 @@
 import { AppError } from '../errors/app-error.js';
-import { login } from '../services/auth.service.js';
+import { login, signup, forgotPassword, resetPassword, verify } from '../services/auth.service.js';
 import { decodeToken } from '../utils/jwt.util.js';
 
 export async function postLogin(req, res, next) {
@@ -11,6 +11,7 @@ export async function postLogin(req, res, next) {
     const fifteenMinutesMs = 15 * 60 * 1000;
     const cookieMaxAge = Number(process.env.ACCESS_TOKEN_COOKIE_MAX_AGE_MS || fifteenMinutesMs);
     const secure = process.env.NODE_ENV === 'production';
+
     res.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure,
@@ -30,6 +31,40 @@ export async function postLogin(req, res, next) {
     next(e);
   }
 }
+
+export async function postSignup(req, res, next) {
+  try {
+    const { name, username, email, password } = req.body;
+    const result = await signup(name, username, email, password);
+    res.status(201).json({
+      message: 'User created',
+      user: result.user,
+    });
+  } catch (e) {
+    next(e);
+  }
+}
+
+export async function postForgotPassword(req, res, next) {
+    try {
+      const { email } = req.body;
+      const response = await forgotPassword(email);
+      res.json(response);
+    } catch (e) {
+      next(e);
+    }
+  }
+  
+  export async function postResetPassword(req, res, next) {
+    try {
+      const { password } = req.body;
+      const token = req.query.token;
+      await resetPassword(token, password);
+      res.json({ message: 'Password has been reset' });
+    } catch (e) {
+      next(e);
+    }
+  }
 
 export async function getTokenStructure(req, res) {
   const authHeader = req.headers.authorization;
@@ -52,3 +87,18 @@ export async function postLogout(req, res) {
   res.json({message: 'Logged out, cookie cleared'})
 
 }
+
+export const verifyEmail = async (req, res, next) => {
+  const { code } = req.body;
+  console.log("code: ", code, ' ' , "code after casted: ", Number(code))
+  try {
+    const user = await verify(code)
+    res.status(200).json({
+      success: true,
+      message: "Email verified successfully",
+      ...user
+    });
+  } catch (error) {
+    next(error);
+  }
+};

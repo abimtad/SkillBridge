@@ -1,0 +1,63 @@
+import {
+  PASSWORD_RESET_REQUEST_TEMPLATE,
+  PASSWORD_RESET_SUCCESS_TEMPLATE,
+  VERIFICATION_EMAIL_TEMPLATE,
+} from "./emailTemplates.js";
+import { mailer } from "./mailer.js";
+import { WELCOME_EMAIL_TEMPLATE } from "./emailTemplates.js";
+import {env} from "../../config/index.js";
+
+export const sendVerificationEmail = async (email, verificationCode) => {
+  try {
+    console.log("sending verificaton email")
+    await mailer.sendMail({
+      from: { name: "Abel", address: env.authEmail },
+      to: email,
+      subject: "Email Verification",
+      html: VERIFICATION_EMAIL_TEMPLATE.replace(
+        "{verificationCode}",
+        verificationCode
+      ),
+    });
+    console.log("verificaton email sent")
+  } catch (error) {
+    console.log("Failed to send email Verification", error);
+    throw new Error("Error sending verification Email", error);
+  }
+};
+
+export const sendWelcomeEmail = async (email, name) => {
+  try {
+    await mailer.sendMail({
+      from: { name: "Abel", address: env.authEmail },
+      to: email,
+      subject: "Welcome",
+      html: WELCOME_EMAIL_TEMPLATE.replace("{name}", name),
+    });
+  } catch (error) {
+    console.log("Failed to send welcome email", error);
+    throw new Error("Error sending welcome email", error);
+  }
+};
+
+export const sendForgotPasswordEmail = async (email, resetUrl) => {
+  await mailer.sendMail({
+    from: { name: "Abel", address: env.authEmail },
+    to: email,
+    subject: "Forgot Password",
+    html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetUrl),
+  });
+};
+
+export const sendPasswordResetSuccessEmail = async (email, next) => {
+  try {
+    await mailer.sendMail({
+      from: { name: "Abel", address: env.authEmail },
+      to: email,
+      subject: "Successfully reset password !",
+      html: PASSWORD_RESET_SUCCESS_TEMPLATE,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

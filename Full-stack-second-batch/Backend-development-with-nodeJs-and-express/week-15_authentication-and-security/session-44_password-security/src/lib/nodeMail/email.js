@@ -9,6 +9,7 @@ import {env} from "../../config/index.js";
 
 export const sendVerificationEmail = async (email, verificationCode) => {
   try {
+    console.log("sending verificaton email")
     await mailer.sendMail({
       from: { name: "Abel", address: env.authEmail },
       to: email,
@@ -18,6 +19,7 @@ export const sendVerificationEmail = async (email, verificationCode) => {
         verificationCode
       ),
     });
+    console.log("verificaton email sent")
   } catch (error) {
     console.log("Failed to send email Verification", error);
     throw new Error("Error sending verification Email", error);

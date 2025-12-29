@@ -16,7 +16,7 @@ export const validateLogin = [
 
 export const validateSignup = [
   body("name")
-    .isLength({ min: 10 })
+    .isLength({ min: 4 })
     .withMessage('name must be at least 3 characters long'),
   body('username')
     .isLength({ min: 3 })

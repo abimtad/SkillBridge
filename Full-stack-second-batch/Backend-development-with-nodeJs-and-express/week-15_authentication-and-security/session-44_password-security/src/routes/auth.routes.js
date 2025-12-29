@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { authenticate, authorize } from '../middlewares/auth.middleware.js';
-import { postLogin, getTokenStructure, postLogout, postSignup, postForgotPassword, postResetPassword } from '../controllers/auth.controller.js';
+import { postLogin, getTokenStructure, postLogout, postSignup, postForgotPassword, postResetPassword, verifyEmail } from '../controllers/auth.controller.js';
 import { validateSignup, validateEmail, validateLogin, validateRequest } from '../middlewares/validation.middleware.js';
 
 export const router = Router();
@@ -20,7 +20,7 @@ router.post(
   postForgotPassword
 );
 router.post('/reset-password', postResetPassword);
-router.post('/verify-email', postResetPassword);
+router.post('/verify-email', verifyEmail);
 
 // Clear cookie on logout
 router.post('/logout', postLogout);

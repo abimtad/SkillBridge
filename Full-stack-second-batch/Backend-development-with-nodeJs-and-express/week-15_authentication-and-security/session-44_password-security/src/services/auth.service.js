@@ -61,7 +61,8 @@ export async function login(username, password) {
 
 export async function forgotPassword(email) {
     await db.read();
-    const user = db.data.users.find((u) => u.email === email);
+    console.log("email", email)
+    const user = db.data.users.find((u) => u.email === email)
     if (!user) {
       throw new AppError(404, 'User not found');
     }
@@ -72,8 +73,8 @@ export async function forgotPassword(email) {
   
     await db.write();
 
-    const resetUrl = env.baseUrl + `/reset-password/${resetPasswordToken}`;
-    await sendForgotPasswordEmail(user.email, resetUrl, next);
+    const resetUrl = env.baseUrl + `/reset-password/?token=${user.resetPasswordToken}`;
+    await sendForgotPasswordEmail(user.email, resetUrl);
   
     // In a real app, you'd send an email with the resetToken
     console.log(`Password reset token for ${email}: ${resetToken}`);
@@ -113,10 +114,16 @@ export async function forgotPassword(email) {
 export async function verify(verificationCode) {
     await db.read()
 
-    const user = await db.data.users.find( (u) =>{
-      u.verificationToken === verificationCode &&
-      u.verificationTokenExpiresAt  > Date.now()
-    });
+    console.log("verification code: ", verificationCode)
+
+    const user = db.data.users.find(
+      (u) => {
+        console.log(u.verificationToken, ' ', u.verificationTokenExpiresAt > Date.now())
+        console.log("token is correct? ", u.verificationToken === verificationCode)
+        return u.verificationToken === verificationCode && u.verificationTokenExpiresAt > Date.now()
+
+      }
+    );
 
     if (!user) {
       throw  new AppError(400, "Invalid or expired verification code");
@@ -125,7 +132,7 @@ export async function verify(verificationCode) {
     user.isVerified = true;
     user.verificationToken = undefined;
     user.verificationTokenExpiresAt = undefined;
-    await user.write();
+    await db.write();
 
     await sendWelcomeEmail(user.email, user.name);
 

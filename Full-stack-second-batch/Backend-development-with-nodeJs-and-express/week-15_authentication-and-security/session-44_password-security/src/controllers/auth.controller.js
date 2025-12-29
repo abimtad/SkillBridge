@@ -1,6 +1,5 @@
-import { verify } from 'crypto';
 import { AppError } from '../errors/app-error.js';
-import { login, signup, forgotPassword, resetPassword } from '../services/auth.service.js';
+import { login, signup, forgotPassword, resetPassword, verify } from '../services/auth.service.js';
 import { decodeToken } from '../utils/jwt.util.js';
 
 export async function postLogin(req, res, next) {
@@ -91,6 +90,7 @@ export async function postLogout(req, res) {
 
 export const verifyEmail = async (req, res, next) => {
   const { code } = req.body;
+  console.log("code: ", code, ' ' , "code after casted: ", Number(code))
   try {
     const user = await verify(code)
     res.status(200).json({

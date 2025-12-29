@@ -40,17 +40,13 @@ export const sendWelcomeEmail = async (email, name) => {
   }
 };
 
-export const sendForgotPasswordEmail = async (email, resetUrl, next) => {
-  try {
-    await mailer.sendMail({
-      from: { name: "Abel", address: env.authEmail },
-      to: email,
-      subject: "Forgot Password",
-      html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetUrl),
-    });
-  } catch (error) {
-    next(error);
-  }
+export const sendForgotPasswordEmail = async (email, resetUrl) => {
+  await mailer.sendMail({
+    from: { name: "Abel", address: env.authEmail },
+    to: email,
+    subject: "Forgot Password",
+    html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetUrl),
+  });
 };
 
 export const sendPasswordResetSuccessEmail = async (email, next) => {

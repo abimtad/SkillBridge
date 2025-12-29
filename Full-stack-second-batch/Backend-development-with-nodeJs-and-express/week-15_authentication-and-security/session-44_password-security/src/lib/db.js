@@ -3,7 +3,7 @@ import { JSONFile } from 'lowdb/node';
 
 // LowDB setup
 const adapter = new JSONFile('db.json');
-export const db = new Low(adapter, { users: [] });
+export const db =  new Low(adapter, { users: [] });
 
 export async function initDb() {
   await db.read();

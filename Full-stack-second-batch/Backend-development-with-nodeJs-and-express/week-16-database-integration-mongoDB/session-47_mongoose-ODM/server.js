@@ -1,15 +1,20 @@
 require("dotenv").config();
 const express = require("express");
+const app = express();
+
 const connectDB = require("./config/db");
+const logger = require("./middleware/logger");
 const studentRoutes = require("./routes/student.routes");
 
-const app = express();
-app.use(express.json());
-
-// connect to Mongo
+// Connect DB
 connectDB();
 
-// routes
-app.use("/students", studentRoutes);
+// Middleware
+app.use(express.json());
+app.use(logger);
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// Routes
+app.use("/students", studentRoutes);
+console.log("process", process.env)
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

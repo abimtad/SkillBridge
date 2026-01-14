@@ -1,0 +1,216 @@
+@baseUrl = http://localhost:5000
+
+# ============================================
+# STUDENT ENDPOINTS
+# ============================================
+
+### Get all students
+GET {{baseUrl}}/students
+
+### Create a student with EMBEDDED ADDRESS (Embedded Document Example)
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "firstName": "Ada",
+  "lastName": "Lovelace",
+  "email": "ada@example.com",
+  "cohort": "16",
+  "gpa": 3.9,
+  "interests": ["math", "computing"],
+  "address": {
+    "street": "123 Tech Street",
+    "city": "London",
+    "state": "England",
+    "zipCode": "SW1A 1AA",
+    "country": "UK"
+  }
+}
+
+### Create another student with embedded address
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "firstName": "Alan",
+  "lastName": "Turing",
+  "email": "alan@example.com",
+  "cohort": "16",
+  "gpa": 3.7,
+  "interests": ["logic", "cryptography"],
+  "address": {
+    "street": "456 Science Avenue",
+    "city": "Manchester",
+    "state": "England",
+    "zipCode": "M1 1AA",
+    "country": "UK"
+  }
+}
+
+### Set an ID variable after creating (replace with actual ID)
+@studentId = 000000000000000000000000
+
+### Get one student by id
+GET {{baseUrl}}/students/{{studentId}}
+
+### Get student with POPULATED COURSES (Population Example)
+GET {{baseUrl}}/students/{{studentId}}/courses
+
+### Get all students with populated courses
+GET {{baseUrl}}/students/with-courses
+
+### Get students with course statistics using AGGREGATION
+GET {{baseUrl}}/students/course-stats
+
+### Get students by cohort using AGGREGATION
+GET {{baseUrl}}/students/cohort/FS-16
+
+### Update student by id
+PUT {{baseUrl}}/students/{{studentId}}
+Content-Type: application/json
+
+{
+  "gpa": 3.95,
+  "interests": ["math", "computing", "analytics"]
+}
+
+### Delete student by id
+DELETE {{baseUrl}}/students/{{studentId}}
+
+# ============================================
+# COURSE ENDPOINTS
+# ============================================
+
+### Get all courses
+GET {{baseUrl}}/courses
+
+### Create a course (REFERENCED RELATIONSHIP Example)
+POST {{baseUrl}}/courses
+Content-Type: application/json
+
+{
+  "courseCode": "CS101",
+  "courseName": "Introduction to Computer Science",
+  "instructor": "Dr. Smith",
+  "credits": 3,
+  "capacity": 30,
+  "schedule": {
+    "days": ["Monday", "Wednesday"],
+    "time": "10:00 AM - 11:30 AM",
+    "room": "Room 101"
+  }
+}
+
+### Create another course
+POST {{baseUrl}}/courses
+Content-Type: application/json
+
+{
+  "courseCode": "MATH201",
+  "courseName": "Advanced Mathematics",
+  "instructor": "Dr. Johnson",
+  "credits": 4,
+  "capacity": 25,
+  "schedule": {
+    "days": ["Tuesday", "Thursday"],
+    "time": "2:00 PM - 3:30 PM",
+    "room": "Room 202"
+  }
+}
+
+### Set course ID variable (replace with actual ID)
+@courseId = 000000000000000000000000
+
+### Get one course by id
+GET {{baseUrl}}/courses/{{courseId}}
+
+### Get course with POPULATED STUDENTS (Population Example)
+GET {{baseUrl}}/courses/{{courseId}}/students
+
+### Get course with nested population (Nested Population Example)
+GET {{baseUrl}}/courses/{{courseId}}/students-details
+
+### Get course statistics using AGGREGATION
+GET {{baseUrl}}/courses/statistics
+
+### Get courses with student details using AGGREGATION LOOKUP
+GET {{baseUrl}}/courses/with-students-details
+
+### Get available courses using AGGREGATION
+GET {{baseUrl}}/courses/available
+
+### Enroll student in course (Creates REFERENCE relationship)
+POST {{baseUrl}}/courses/{{courseId}}/enroll/{{studentId}}
+
+### Update course by id
+PUT {{baseUrl}}/courses/{{courseId}}
+Content-Type: application/json
+
+{
+  "capacity": 35
+}
+
+### Delete course by id
+DELETE {{baseUrl}}/courses/{{courseId}}
+
+# ============================================
+# TESTING RELATIONSHIPS
+# ============================================
+
+### Step 1: Create a student
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "Student",
+  "email": "test@example.com",
+  "cohort": "2024",
+  "gpa": 3.5,
+  "address": {
+    "street": "789 Test St",
+    "city": "Test City",
+    "state": "TS",
+    "zipCode": "12345"
+  }
+}
+
+### Step 2: Create a course
+POST {{baseUrl}}/courses
+Content-Type: application/json
+
+{
+  "courseCode": "TEST101",
+  "courseName": "Test Course",
+  "instructor": "Test Instructor",
+  "credits": 2,
+  "capacity": 10
+}
+
+### Step 3: Enroll student in course (use IDs from steps 1 & 2)
+POST {{baseUrl}}/courses/{{courseId}}/enroll/{{studentId}}
+
+### Step 4: Verify relationship - Get student with courses
+GET {{baseUrl}}/students/{{studentId}}/courses
+
+### Step 5: Verify relationship - Get course with students
+GET {{baseUrl}}/courses/{{courseId}}/students
+
+# ============================================
+# TEST ENDPOINTS - Methods, Static Functions, Indexes
+# ============================================
+
+### Test Student Model - All methods, static functions, and indexes
+GET {{baseUrl}}/test/student
+
+### Test Course Model - All methods, static functions, and indexes
+GET {{baseUrl}}/test/course
+
+### Test All Models - Complete overview of all models
+GET {{baseUrl}}/test/all
+
+### Get detailed index information for Student model
+GET {{baseUrl}}/test/indexes/student
+
+### Get detailed index information for Course model
+GET {{baseUrl}}/test/indexes/course

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const addressSchema = require("./address.model");
 
 // Schema definition
 const studentSchema = new mongoose.Schema({
@@ -37,7 +38,27 @@ const studentSchema = new mongoose.Schema({
     max: 4
   },
 
-  interests: [String]
+  interests: [String],
+
+  // --------- EMBEDDED DOCUMENT (One-to-One) ----------
+  // Embedded documents are stored directly in the parent document
+  // Best for: Data that's always accessed together, one-to-one relationships
+  address: {
+    type: addressSchema,
+    required: false
+  },
+
+  // --------- REFERENCED DOCUMENTS (Many-to-Many) ----------
+  // References store ObjectIds pointing to other documents
+  // Best for: Many-to-many relationships, data that grows independently
+  courses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course"
+  }]
+}, {
+  // Enable virtuals in JSON output
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 
@@ -70,12 +91,24 @@ studentSchema.query.honor = function () {
   return this.where("gpa").gte(3.5);
 };
 
+// --------- INDEXING FOR PERFORMANCE ----------
+// Single field indexes
+studentSchema.index({ email: 1 }); // Already unique, but explicit index helps queries
+studentSchema.index({ cohort: 1 });
+studentSchema.index({ gpa: -1 }); // Descending for sorting high GPA first
 
+// Compound index for common query patterns (e.g., find by cohort and GPA)
+studentSchema.index({ cohort: 1, gpa: -1 });
+
+// Index on courses array for population queries
+studentSchema.index({ courses: 1 });
+
+// Text index for searching across multiple fields
+studentSchema.index({ firstName: "text", lastName: "text", email: "text" });
 
 // --------- POST-SAVE HOOK ----------
 studentSchema.post("save", function (doc) {
   console.log("Student saved successfully:", doc.fullName);
 });
-
 
 module.exports = mongoose.model("Student", studentSchema);

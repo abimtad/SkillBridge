@@ -1,0 +1,20 @@
+# get all students
+GET http://localhost:5000/students
+
+
+# create student
+POST http://localhost:5000/students
+Content-Type: Application/json
+
+{
+	"firstName": "Abel",
+    "lastName": "Tadesse",
+    "email": "abel.tadesse@example.com",
+    "cohort": "FS-2025",
+    "gpa": 3.7,
+    "interests": [
+      "Web Development",
+      "AI",
+      "Football"
+    ]
+}

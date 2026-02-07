@@ -1,0 +1,68 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Student {
+    id        Int      @id @default(autoincrement())
+    firstName String
+    lastName  String
+    email     String   @unique
+    address   Address?
+    courses   Course[]
+}
+
+model Address {
+    id        Int     @id @default(autoincrement())
+    street    String
+    city      String
+    country   String
+    student   Student @relation(fields: [studentId], references: [id])
+    studentId Int     @unique
+}
+
+model Course {
+    id       Int       @id @default(autoincrement())
+    name     String    @unique
+    students Student[]
+}
+
+// -------------------------
+// MongoDB schema (commented)
+// -------------------------
+// datasource db {
+//     provider = "mongodb"
+//     url      = env("MONGODB_URL")
+// }
+//
+// generator client {
+//     provider = "prisma-client-js"
+// }
+//
+// model Student {
+//     id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//     firstName String
+//     lastName  String
+//     email     String    @unique
+//     address   Address?
+//     courses   Course[]
+// }
+//
+// model Address {
+//     id        String  @id @default(auto()) @map("_id") @db.ObjectId
+//     street    String
+//     city      String
+//     country   String
+//     student   Student @relation(fields: [studentId], references: [id])
+//     studentId String  @unique @db.ObjectId
+// }
+//
+// model Course {
+//     id       String    @id @default(auto()) @map("_id") @db.ObjectId
+//     name     String    @unique
+//     students Student[]
+// }

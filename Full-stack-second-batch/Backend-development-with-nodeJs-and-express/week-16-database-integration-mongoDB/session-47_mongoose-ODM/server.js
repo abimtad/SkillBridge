@@ -5,6 +5,8 @@ const app = express();
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
 const studentRoutes = require("./routes/student.routes");
+const courseRoutes = require("./routes/course.routes");
+const testRoutes = require("./routes/test.routes");
 
 // Connect DB
 connectDB();
@@ -15,6 +17,8 @@ app.use(logger);
 
 // Routes
 app.use("/students", studentRoutes);
-console.log("process", process.env)
+app.use("/courses", courseRoutes);
+app.use("/test", testRoutes);
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

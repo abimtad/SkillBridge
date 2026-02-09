@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap");
+
+:root {
+  --bg-0: #0f1c21;
+  --bg-1: #10252b;
+  --bg-2: #16323b;
+  --card: #f5efe5;
+  --card-strong: #f0e2ce;
+  --ink: #0c1417;
+  --accent: #f7a33b;
+  --accent-2: #49c1d9;
+  --muted: rgba(12, 20, 23, 0.65);
+  --white: #ffffff;
+  --shadow: 0 18px 45px rgba(4, 10, 12, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, var(--bg-2), var(--bg-0));
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.3;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(0px);
+  opacity: 0.85;
+  animation: float 12s ease-in-out infinite;
+}
+
+.blob-a {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #f7a33b, #f26c4f 70%);
+  top: -120px;
+  right: -120px;
+}
+
+.blob-b {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #49c1d9, #2b7b9a 70%);
+  bottom: -200px;
+  left: -120px;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(24px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.hero {
+  padding: 64px 8vw 32px;
+  color: var(--white);
+  text-align: left;
+  max-width: 1100px;
+  margin: 0 auto;
+  animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  margin: 0 0 14px;
+  opacity: 0.7;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(247, 163, 59, 0.35);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.sections {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 8vw 80px;
+  display: grid;
+  gap: 24px;
+}
+
+.section-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 16px;
+  animation: fadeUp 0.7s ease;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.section-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--card-strong);
+  margin-right: 6px;
+}
+
+.section-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.output {
+  background: #0f1415;
+  color: #e6f2ef;
+  font-family: "Source Code Pro", monospace;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 120px;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.output .line {
+  white-space: pre-wrap;
+}
+
+.challenge-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.footer {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 24px 8vw 48px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 48px;
+  }
+
+  .section-card {
+    padding: 20px;
+  }
+
+  .output {
+    font-size: 0.85rem;
+  }
+}

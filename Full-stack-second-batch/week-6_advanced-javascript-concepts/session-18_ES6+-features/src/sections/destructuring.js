@@ -18,24 +18,35 @@ export const destructuringSection = {
       room: { name: "Lab 3", floor: 2 },
     };
 
+    lines.push("--- 1. Object destructuring ---");
+    // Extract properties; rename with : newName
     const {
       day,
       instructor: teacher,
       room: { name: roomName },
     } = schedule;
+    lines.push(`day → ${day}`);
+    lines.push(`instructor (renamed to teacher) → ${teacher}`);
+    lines.push(`room.name (nested, renamed to roomName) → ${roomName}`);
 
-    lines.push(`Day: ${day}`);
-    lines.push(`Teacher: ${teacher}`);
-    lines.push(`Room: ${roomName}`);
-
+    lines.push("");
+    lines.push("--- 2. Array destructuring + rest ---");
     const [firstTopic, secondTopic, ...restTopics] = schedule.topics;
-    lines.push(`Topics: ${firstTopic}, ${secondTopic}`);
-    lines.push(`More: ${restTopics.join(", ")}`);
+    lines.push(`firstTopic: ${firstTopic}, secondTopic: ${secondTopic}`);
+    lines.push(`...restTopics: [${restTopics.join(", ")}]`);
 
+    lines.push("");
+    lines.push("--- 3. Swap without a temp variable ---");
     let a = "left";
     let b = "right";
+    lines.push(`Before: a="${a}", b="${b}"`);
     [a, b] = [b, a];
-    lines.push(`Swap: a=${a}, b=${b}`);
+    lines.push(`After [a, b] = [b, a]: a="${a}", b="${b}"`);
+
+    lines.push("");
+    lines.push("--- 4. Default values in destructuring ---");
+    const { missing = "default" } = {};
+    lines.push(`const { missing = "default" } = {} → missing = "${missing}"`);
 
     return lines;
   },

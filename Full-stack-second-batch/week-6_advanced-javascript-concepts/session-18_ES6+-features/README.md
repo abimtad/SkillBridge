@@ -9,6 +9,8 @@ Open `index.html` in a local server and click each section to run.
 - `npm run start`
 - Open `http://localhost:5173`
 
+> To see your code changes, save your file and then **refresh the browser**.
+
 Run the Node version:
 - `npm run run:node`
 
